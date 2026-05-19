@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Sparkles, Copy, Check } from 'lucide-react';
+const API = process.env.NEXT_PUBLIC_API_URL;
 
 export default function AiAssistantPage() {
   const [topic, setTopic] = useState('');
   const [tone, setTone] = useState('viral');
   const [loading, setLoading] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
-  
+
   // AI Response States
   const [aiResponse, setAiResponse] = useState<{
     caption: string;
@@ -35,9 +36,9 @@ export default function AiAssistantPage() {
 
     try {
       const token = localStorage.getItem('token');
-      
+
       const response = await axios.post(
-        'http://localhost:5000/api/ai/generate',
+        `${API}/api/ai/generate`,
         { topic, tone },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -121,11 +122,10 @@ export default function AiAssistantPage() {
                     key={t.id}
                     type="button"
                     onClick={() => setTone(t.id)}
-                    className={`flex flex-col items-start p-3 rounded-xl border text-left transition-all ${
-                      tone === t.id
+                    className={`flex flex-col items-start p-3 rounded-xl border text-left transition-all ${tone === t.id
                         ? 'bg-indigo-600/10 border-indigo-500 text-indigo-400'
                         : 'bg-[#030712] border-gray-800 text-gray-400 hover:border-gray-700'
-                    }`}
+                      }`}
                   >
                     <span className="text-sm font-semibold">{t.label}</span>
                     <span className="text-xs text-gray-500 mt-0.5">{t.desc}</span>

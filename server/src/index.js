@@ -1,23 +1,23 @@
 const express = require("express");
 const cors = require("cors");
-const path = require("path"); // 👑 Path module zaroori hai
+const path = require("path");
 const dotenv = require("dotenv");
 const http = require("http");
 const { Server } = require("socket.io");
 
-// 👑 UPDATE 1: Absolute path se .env load kiya taaki REDIS_URL mil sake aur 127.0.0.1 ka loop band ho!
+// Load env
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
-// Routes aur DB Imports
-const aiRoutes = require("./routes/aiRoutes"); // 👑 AI route wapas joda
+// Routes & DB
+const aiRoutes = require("./routes/aiRoutes");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
 
-// Database Configuration
+// DB connect
 connectDB();
 
-// 👑 UPDATE 2: Background queues/workers ko initialize kiya (Redis ab khush rahega)
+// Workers
 require("./workers/postWorker");
 
 const app = express();
@@ -26,7 +26,7 @@ const server = http.createServer(app);
 // Socket.io Setup
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*", // 👈 production safe (localhost hata diya)
     methods: ["GET", "POST"],
   },
 });
@@ -36,16 +36,26 @@ global.io = io;
 app.use(cors());
 app.use(express.json());
 
-// Routes Setup
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
-app.use("/api/ai", aiRoutes); // 👑 AI route connect kiya
+app.use("/api/ai", aiRoutes);
 
+// ================================
+// 🚀 FRONTEND SERVE ADD (NEW PART)
+// ================================
+app.use(express.static(path.join(__dirname, "../client/out")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/out/index.html"));
+});
+
+// Home route
 app.get("/", (req, res) => {
   res.send("SocialSync AI Server Running");
 });
 
-// Socket Connections
+// Socket events
 io.on("connection", (socket) => {
   console.log("User Connected 🔌:", socket.id);
 
@@ -56,7 +66,6 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 5000;
 
-// 👑 Hamesha dhyan rakhna, jab socket.io use karte hain toh server.listen() chalate hain, app.listen() nahi!
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
