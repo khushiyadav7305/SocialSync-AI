@@ -5,6 +5,11 @@ const dotenv = require("dotenv");
 const http = require("http");
 const { Server } = require("socket.io");
 
+app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/ai", aiRoutes);
+app.use(express.static(path.join(__dirname, "../client/out")));
+
 // Load env
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
@@ -46,7 +51,7 @@ app.use("/api/ai", aiRoutes);
 // ================================
 app.use(express.static(path.join(__dirname, "../client/out")));
 
-app.get("*", (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "../client/out/index.html"));
 });
 
