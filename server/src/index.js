@@ -5,10 +5,10 @@ const dotenv = require("dotenv");
 const http = require("http");
 const { Server } = require("socket.io");
 
-// 1. Load env (Isko sabse upar rakhna best hota hai)
+// 1. Load env
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
-// 2. Routes & DB Modules require karein
+// 2. Routes & DB Modules
 const aiRoutes = require("./routes/aiRoutes");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
@@ -18,7 +18,7 @@ const postRoutes = require("./routes/postRoutes");
 connectDB();
 require("./workers/postWorker");
 
-// 4. Express aur Server ko initialize karein (Ab 'app' ready hai!)
+// 4. Express aur Server initialize
 const app = express();
 const server = http.createServer(app);
 
@@ -32,26 +32,22 @@ const io = new Server(server, {
 
 global.io = io;
 
-// 6. Middlewares lagayein
+// 6. Middlewares
 app.use(cors());
 app.use(express.json());
 
-// 7. API Routes (Ab chalenge kyunki routes aur app dono ready hain)
+// 7. API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/ai", aiRoutes);
 
 // ================================
-// 🚀 FRONTEND SERVE ADD (NEW PART)
+// 🚀 FRONTEND SERVE ADD
 // ================================
+// Static files (JS, CSS, Images) ko serve karne ke liye
 app.use(express.static(path.join(__dirname, "../client/out")));
 
-// Home route
-app.get("/", (req, res) => {
-  res.send("SocialSync AI Server Running");
-});
-
-// Wildcard route frontend ke liye (Isko hamesha baki routes ke NICHE hona chahiye)
+// Saare frontend requests (including "/") ko Next.js ki index.html par redirect karne ke liye
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "../client/out/index.html"));
 });
