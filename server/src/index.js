@@ -42,14 +42,13 @@ app.use("/api/posts", postRoutes);
 app.use("/api/ai", aiRoutes);
 
 // ================================
-// 🚀 FRONTEND SERVE ADD
+// 🚀 FRONTEND SERVE ADD (FIXED PATH)
 // ================================
-// Static files (JS, CSS, Images) ko serve karne ke liye
-app.use(express.static(path.join(__dirname, "../client/out")));
+// Hum 'src' ke andar hain, toh do baar '../' karke root folder ke 'client/out' mein jayenge
+app.use(express.static(path.join(__dirname, "../../client/out")));
 
-// Saare frontend requests (including "/") ko Next.js ki index.html par redirect karne ke liye
 app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/out/index.html"));
+  res.sendFile(path.join(__dirname, "../../client/out/index.html"));
 });
 
 // Socket events
