@@ -41,14 +41,6 @@ SocialSync AI bridges this gap by merging **Scalable Backend Engineering** with 
 
 ---
 
-## ⭐ Advanced Engineering Features (Star Factor)
-* 🌍 **Multi-Language Adaptability:** Content generation support tailored natively for English, Hindi, and Hinglish.
-* 🎙️ **Voice-to-Post AI:** Real-time speech parsing via the Web Speech API to auto-draft scheduled campaigns.
-* 🧠 **AI Image Understanding:** Multimodal analysis of images to extract ambient context and auto-propose captions.
-* 👥 **Approval Workflow Controls:** Multi-member collaboration models built over a shared editorial grid layout.
-
----
-
 ## 🛠️ Technical Stack
 
 | Layer | Technologies Used |
