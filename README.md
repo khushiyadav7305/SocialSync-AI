@@ -61,6 +61,22 @@ SocialSync AI bridges this gap by merging **Scalable Backend Engineering** with 
 
 ---
 
+## 🚀 Future Scope
+* 📸 **Social Graph Integrations:** Live automated publishing pipelines connected with official Facebook Graph, Instagram Graph, and LinkedIn API layers.
+* 💳 **SaaS Monetization:** Tiered premium subscription management models utilizing **Stripe APIs** for secure webhooks and billing cycles.
+* 🎥 **Generative Media Frameworks:** Automated layout support for localized smart video captions, voiceovers, and AI-driven thumbnail variant generations.
+* 📈 **Advanced Analytics Engines:** Predictive tracking system estimating future post performance based on historical client trends.
+
+---
+
+## 👨‍💻 Skills Demonstrated
+* ⚡ **Full Stack Software Engineering:** Orchestrating complex data flow between reactive Next.js client layers and asynchronous Express backend nodes.
+* 🏗️ **Distributed Task Queue Processing:** Engineering robust, resilient, and non-blocking scheduling matrices using Redis-backed **BullMQ** processing patterns.
+* 🤖 **Applied Generative AI Integration:** Context-aware prompt engineering, multimodal analysis, and structured responses utilizing **Gemini AI API**.
+* 🛡️ **Scalable Architecture & System Design:** Designing modular MVC architectures featuring persistent WebSockets (`Socket.io`) and optimized middleware layers.
+* 🎨 **High-Converting Premium UI/UX Design:** Crafting modern dashboard mechanics using Tailwind CSS, Framer Motion, and responsive visual charts.
+
+
 ## 📂 Project Folder Structure
 
 ```text
@@ -87,18 +103,3 @@ SocialSync-AI/
 │   └── package.json
 
 ---
-
-## 🚀 Future Scope
-* 📸 **Social Graph Integrations:** Live automated publishing pipelines connected with official Facebook Graph, Instagram Graph, and LinkedIn API layers.
-* 💳 **SaaS Monetization:** Tiered premium subscription management models utilizing **Stripe APIs** for secure webhooks and billing cycles.
-* 🎥 **Generative Media Frameworks:** Automated layout support for localized smart video captions, voiceovers, and AI-driven thumbnail variant generations.
-* 📈 **Advanced Analytics Engines:** Predictive tracking system estimating future post performance based on historical client trends.
-
----
-
-## 👨‍💻 Skills Demonstrated
-* ⚡ **Full Stack Software Engineering:** Orchestrating complex data flow between reactive Next.js client layers and asynchronous Express backend nodes.
-* 🏗️ **Distributed Task Queue Processing:** Engineering robust, resilient, and non-blocking scheduling matrices using Redis-backed **BullMQ** processing patterns.
-* 🤖 **Applied Generative AI Integration:** Context-aware prompt engineering, multimodal analysis, and structured responses utilizing **Gemini AI API**.
-* 🛡️ **Scalable Architecture & System Design:** Designing modular MVC architectures featuring persistent WebSockets (`Socket.io`) and optimized middleware layers.
-* 🎨 **High-Converting Premium UI/UX Design:** Crafting modern dashboard mechanics using Tailwind CSS, Framer Motion, and responsive visual charts.
