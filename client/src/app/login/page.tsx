@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import API from "../../services/api";
-import { useAuth } from "../../context/AuthContext"; // 1. Auth context hook import kiya
+import { useAuth } from "../../context/AuthContext"; 
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  // 2. Context se login function nikal liya
   const { login } = useAuth();
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -27,14 +28,14 @@ export default function LoginPage() {
     try {
       const res = await API.post("/auth/login", formData);
 
-      // 3. Agar backend user data aur token de raha hai, toh seedhe pass karo
-      // NOTE: Agar backend user object res.data.user ke bajay res.data mein hi data deta hai, 
-      // toh aap us hisab se parameters adjust kar sakti hain (Jaise: res.data.token, res.data.user || res.data)
       if (res.data && res.data.token) {
         toast.success("Login Successful 🎉");
         
-        // Yeh call pure application ki auth state ko instantly stable kar degi
+        // Auth state update aur localstorage handle karega
         login(res.data.token, res.data.user || { id: res.data.id, name: res.data.name, email: res.data.email });
+        
+        // Login ke baad dashboard par bhejega
+        router.push("/dashboard");
       } else {
         toast.error("Invalid token format from server.");
       }
